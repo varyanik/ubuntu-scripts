@@ -1,16 +1,5 @@
 #!/bin/bash
 
-#settings
-gsettings set com.canonical.desktop.interface scrollbar-mode normal
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
-gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
-gsettings set com.canonical.Unity.Lenses remote-content-search 'none'
-gsettings set com.canonical.unity.webapps integration-allowed false
-
-#reset unity
-#sudo apt-get install --reinstall unity ubuntu-desktop
-#dconf reset -f /org/compiz/ && unity --reset-icons &disown
-
 not_installed() {
   return $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed")
 }
@@ -42,15 +31,15 @@ if not_installed 'gparted'; then
 fi
 
 if not_installed 'skype'; then
-  #32 bit dependency
+  # 32 bit dependency
   sudo apt-get install -y sni-qt:i386 libdbusmenu-qt2:i386 libqt4-dbus:i386 libxss1:i386
-  #theme dependency
+  # theme dependency
   sudo apt-get install -y libgtk2.0-0:i386 gtk2-engines:i386 libgconf-2-4:i386
-  #audio dependency
+  # audio dependency
   sudo apt-get install -y libasound2-plugins:i386
-  #webcam dependency
+  # webcam dependency
   sudo apt-get install -y libv4l-0:i386
-  #fix UI
+  # fix UI
   sudo apt-get install -y gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
 
   sudo add-apt-repository -y "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
@@ -84,16 +73,6 @@ fi
 
 if not_installed 'gimp'; then
   sudo apt-get install -y gimp gimp-data gimp-plugin-registry gimp-data-extras
-fi
-
-if not_installed 'ubuntu-restricted-extras'; then
-  sudo apt-get install -y --force-yes --quiet ubuntu-restricted-extras
-  #play DVDs
-  sudo /usr/share/doc/libdvdread4/install-css.sh
-  #accept EULA agreement
-  echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-  #a few common codecs for better playback
-  sudo apt-get install -y gstreamer0.10-plugins-ugly gxine libdvdread4 icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 gstreamer1.0-libav
 fi
 
 if not_installed 'virtualbox-4.3'; then
@@ -163,18 +142,8 @@ if not_installed 'libav-tools'; then
   sudo apt-get install -y libav-tools
 fi
 
-if not_installed 'oracle-java8-installer'; then
-  sudo add-apt-repository -y ppa:webupd8team/java
-  sudo apt-get update
-  sudo apt-get install -y --force-yes --quiet oracle-java8-installer icedtea-plugin
-fi
-
 if not_installed 'radiotray'; then
   sudo apt-get install -y radiotray
-fi
-
-if not_installed 'steam'; then
-  sudo apt-get install -y --force-yes --quiet steam
 fi
 
 if not_installed 'shutter'; then
@@ -204,5 +173,34 @@ if not_installed 'touchpad-indicator'; then
   sudo add-apt-repository -y ppa:atareao/atareao
   sudo apt-get update
   sudo apt-get install -y touchpad-indicator
+fi
+
+if not_installed 'simplescreenrecorder'; then
+	sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
+	sudo apt-get update
+	sudo apt-get install -y simplescreenrecorder
+	# if you want to record 32-bit OpenGL applications on a 64-bit system
+	sudo apt-get install -y simplescreenrecorder-lib:i386
+fi
+
+# https://www.youtube.com/watch?v=Ulh4PlYYCDA
+if not_installed 'ubuntu-restricted-extras'; then
+  sudo apt-get install -y --force-yes --quiet ubuntu-restricted-extras
+  # play DVDs
+  sudo /usr/share/doc/libdvdread4/install-css.sh
+  # accept EULA agreement
+  echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+  # a few common codecs for better playback
+  sudo apt-get install -y gstreamer0.10-plugins-ugly gxine libdvdread4 icedax tagtool easytag id3tool lame nautilus-script-audio-convert libmad0 mpg321 gstreamer1.0-libav
+fi
+
+if not_installed 'oracle-java8-installer'; then
+  sudo add-apt-repository -y ppa:webupd8team/java
+  sudo apt-get update
+  sudo apt-get install -y --force-yes --quiet oracle-java8-installer icedtea-plugin
+fi
+
+if not_installed 'steam'; then
+  sudo apt-get install -y --force-yes --quiet steam
 fi
 
