@@ -46,6 +46,10 @@ if not_installed 'p7zip'; then
   sudo apt-get install -y p7zip p7zip-full p7zip-rar rar unrar zip unzip unace sharutils uudeview mpack arj cabextract file-roller
 fi
 
+if not_installed 'curl'; then
+  sudo apt-get install -y curl libcurl4-openssl-dev
+fi
+
 if not_installed 'ssh'; then
   sudo apt-get install -y ssh openssh-client
 fi
@@ -70,14 +74,6 @@ if not_installed 'classicmenu-indicator'; then
   sudo apt-get install -y classicmenu-indicator
 fi
 run_program 'classicmenu-indicator'
-
-# http://www.webupd8.org/2012/03/google-tasks-indicator-quick-access-to.html
-if not_installed 'google-tasks-indicator'; then
-  #sudo apt-add-repository -y ppa:diesch/testing
-  #sudo apt-get update
-  sudo apt-get install google-tasks-indicator
-fi
-run_program 'google-tasks-indicator'
 
 # http://ubuntuhandbook.org/index.php/2014/06/calendar-indicator-fixed-icon-broken-crash/
 # 

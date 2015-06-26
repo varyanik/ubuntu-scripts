@@ -15,10 +15,6 @@ if not_installed 'git'; then
   git config --global user.email "varyanik@gmail.com"
 fi
 
-if not_installed 'curl'; then
-  sudo apt-get install -y curl libcurl4-openssl-dev
-fi
-
 if not_installed 'zsync'; then
   sudo apt-get install -y zsync
 fi
