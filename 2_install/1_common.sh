@@ -76,7 +76,6 @@ fi
 run_program 'classicmenu-indicator'
 
 # http://ubuntuhandbook.org/index.php/2014/06/calendar-indicator-fixed-icon-broken-crash/
-# 
 if not_installed 'calendar-indicator'; then
   sudo add-apt-repository -y ppa:atareao/atareao
   sudo apt-get update
