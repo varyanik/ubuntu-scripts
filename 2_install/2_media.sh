@@ -117,6 +117,12 @@ if not_installed 'calibre'; then
   sudo apt-get install -y calibre
 fi
 
+if not_installed 'vkaudiosaver'; then
+  mkdir -p ~/Downloads/vk/audiosaver && cd ~/Downloads/vk/audiosaver
+  wget -O vkaudiosaver.deb "http://vkaudiosaver.ru/downloads/vkaudiosaver-debian-amd64"
+  sudo dpkg -i vkaudiosaver.deb
+fi
+
 # https://www.youtube.com/watch?v=Ulh4PlYYCDA
 if not_installed 'ubuntu-restricted-extras'; then
   sudo apt-get install -y --force-yes --quiet ubuntu-restricted-extras
